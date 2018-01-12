@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div>
+    <p>Welcome to the <code>django-multi-tenant-users</code> example!</p>
+
+    <p>
+        View the public data:
+        <ul>
+            <li><a href="/categories/">Categories</a></li>
+            <li><a href="/products/">Products</a></li>
+        </ul>
+    </p>
+
+    {% if user.is_staff %}
+        <p>Visit the public <a href="/admin/">admin</a></p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <p>
+            Visit a tenant site:
+            <ul>
+                {% for t in user.tenants.all %}
+                    {% if t.domain_url != "local.bitsick.com" %}
+                        <li>
+                            <a href="http://{{t.domain_url}}:8000">{{t.name}}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </p>
+    {% else %}
+        <p><a href="/login/">Log in</a> to visit tenant sites.</p>
+    {% endif %}
+</div>
+{% endblock %}

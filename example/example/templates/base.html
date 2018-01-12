@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %} – django-multi-tenant-users Example</title>
+</head>
+<body>
+    <h1><code>django-multi-tenant-users</code> Example</h1>
+    {% block content %}{% endblock %}
+    <hr>
+    <p>
+        {% if user.is_authenticated %}
+            Logged in as {{user.username }} •
+            <a href="http://local.bitsick.com:8000/logout/">Log out</a>
+        {% else %}
+            <a href="http://local.bitsick.com:8000/login/">Log in</a>
+        {% endif %}
+</body>
+</html>

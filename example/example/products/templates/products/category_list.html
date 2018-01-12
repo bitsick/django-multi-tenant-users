@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Categories - {{tenant.name}}{% endblock %}
+
+{% block content %}
+<div>
+    <h2>{{tenant.name}} Categories</h2>
+
+    <ul>
+        {% for c in categories %}
+            <li>
+                <a href="/categories/{{c.id}}">{{c.name}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="/">Back</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}{{category.name}} - Categories - {{tenant.name}}{% endblock %}
+
+{% block content %}
+<div>
+    <h2>{{tenant.name}} Categories</h2>
+    <h3>{{category.name}}</h3>
+
+    <ul>
+        {% for p in category.products.all %}
+            <li>
+                <a href="/products/{{p.id}}">{{p}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="/categories">Back</a></p>
+</div>
+{% endblock %}

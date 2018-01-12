@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}{{tenant.name}}{% endblock %}
+
+{% block content %}
+<div>
+    <h2>{{tenant.name}} Tenant Site</h2>
+
+    <p>
+        View the tenant data:
+        <ul>
+            <li><a href="/categories/">Categories</a></li>
+            <li><a href="/products/">Products</a></li>
+        </ul>
+    </p>
+
+    {% if user.is_staff %}
+        <p>Visit the tenant site <a href="/admin/">admin</a></p>
+    {% endif %}
+
+    <p>Return to the <a href="http://local.bitsick.com:8000">public site</a></p>
+</div>
+{% endblock %}

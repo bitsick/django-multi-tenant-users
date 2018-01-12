@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Products - {{tenant.name}}{% endblock %}
+
+{% block content %}
+<div>
+    <h2>{{tenant.name}} Products</h2>
+
+    <ul>
+        {% for p in products %}
+            <li>
+                <a href="/products/{{p.id}}">{{p}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="/">Back</a></p>
+</div>
+{% endblock %}
