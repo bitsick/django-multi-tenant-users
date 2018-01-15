@@ -87,7 +87,8 @@ they use certain model fields and methods, the default behavior is quite
 minimal.
 
 If a project has its own authentication system and doesn't rely on Django's
-admin interface, the ``django-multi-tenant-users`` base models can easily be inherited from to add multi-tenant user functionality.
+admin interface, the ``django-multi-tenant-users`` base models can easily be
+inherited from to add multi-tenant user functionality.
 
 If a project is using Django's ``ModelBackend`` for auth and makes use of
 Django's admin interface, ``django-multi-tenant-users`` provides some additional
@@ -115,7 +116,7 @@ recommended. For example:
   # myproject/users/models.py
 
   from django.db import models
-  from multi_tenant_users.users import AbstractUserMixin, TenantUser
+  from multi_tenant_users.users import TenantUser
   from tenant_schemas.models import TenantMixin
 
 
@@ -129,16 +130,14 @@ recommended. For example:
 Next, create a tenant permissions model. This model will be be assigned
 permissions and group memberships within tenants and as such must be
 installed in ``TENANT_APPS``. It must inherit from
-``multi_tenant_users.permissions import TenantPermissionsMixin`` to implement
-the authorization functionality Django expects. For example:
+``multi_tenant_users.permissions.TenantPermissionsMixin`` to implement the
+authorization functionality Django expects. For example:
 
 .. code-block:: python
 
   # myproject/permissions/models.py
 
-  from django.db import models
   from multi_tenant_users.permissions import TenantPermissionsMixin
-  from tenant_schemas.permi import TenantMixin
 
 
   class TenantPermissions(TenantPermissionsMixin):
@@ -161,21 +160,21 @@ models and tell ``django-multi-tenant-users`` which models to use.
   )
 
   TENANT_APPS = (
-      'django.contrib.auth',
       'django.contrib.contenttypes',
+      'django.contrib.auth',
 
-      'example.permissions',  # or wherever the permissions model is defined
+      'myproject.permissions',  # or wherever the permissions model is defined
       # ...
   )
 
   INSTALLED_APPS = (
       'tenant_schemas',
-      'example.users',
+      'myproject.users',
 
       'django.contrib.contenttypes',
       'django.contrib.auth',
 
-      'example.permissions',
+      'myproject.permissions',
       # ...
   )
 
@@ -278,7 +277,6 @@ and ``is_active`` delegators as shown below:
 
   from django.db import models
   from multi_tenant_users.permissions import TenantPermissionsMixin
-  from tenant_schemas.permi import TenantMixin
 
 
   class TenantPermissions(TenantPermissionsMixin):
